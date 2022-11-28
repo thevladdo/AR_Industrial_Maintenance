@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import it.unicam.cs.csd.armaintenancetool.Model.DataModel;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
+import java.util.UUID;
 
 @Service
 public class DataService {
@@ -30,5 +31,9 @@ public class DataService {
             DataModel old = repository.findById(data.getId()).get();
             return repository.save(data);
         } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Selected data doesn't exist yet. Try to add it");
+    }
+
+    public boolean existById(UUID id){
+        return repository.existsById(id);
     }
 }
