@@ -16,9 +16,6 @@ public class ZoneModel {
     @Id
     private ZoneId id;
     private ArrayList<DataModel> data;
-    private double coordinateX;
-    private double coordinateY;
-    private double coordinateZ;
     private double value;
 
     @Getter

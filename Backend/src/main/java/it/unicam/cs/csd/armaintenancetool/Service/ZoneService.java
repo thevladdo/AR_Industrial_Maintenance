@@ -42,7 +42,9 @@ public class ZoneService {
     public List<DataModel> addDataToZone(List<DataModel> dataToAdd, ZoneModel.ZoneId zoneId){
         if(repository.existsById(zoneId)){
             ZoneModel zone = repository.findById(zoneId).get();
-            //TODO: check if dataToAdd is ALREADY in zone with a separate method
+            if (existDataInZone(dataToAdd, zone)){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid data: some data already exist");
+            }
             if(zone.getData().addAll(dataToAdd)){
                 for (DataModel data : dataToAdd) {
                     if(!dataService.existById(data.getId())){
@@ -75,7 +77,7 @@ public class ZoneService {
     public List<DataModel> updateDataInZone(List<DataModel> dataToUpdate, ZoneModel.ZoneId zoneId) {
         if (repository.existsById(zoneId)) {
             ZoneModel zone = repository.findById(zoneId).get();
-            if (zone.getData().containsAll(dataToUpdate)) {
+            if (zone.getData().isEmpty()) {
                 for (DataModel data : dataToUpdate) {
                     if (dataService.existById(data.getId())) {
                         dataService.updateData(data);
@@ -84,7 +86,15 @@ public class ZoneService {
                 }
                 repository.save(zone);
                 return dataToUpdate;
-            } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid data: some data doesn't exist");
+            } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid data: data doesn't exist");
         }else throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Selected zone doesn't exist yet. Try to add it");
+    }
+
+    public boolean existById (ZoneModel.ZoneId zoneId){
+        return repository.existsById(zoneId);
+    }
+
+    private boolean existDataInZone(List<DataModel> data, ZoneModel zone){
+        return zone.getData().containsAll(data);
     }
 }
