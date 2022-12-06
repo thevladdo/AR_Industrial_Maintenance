@@ -2,7 +2,7 @@
     package="com.example.ar_industrial_maintenance">
    <application
         android:label="ar_industrial_maintenance"
-        android:name="${applicationName}"
+        android:name="Loccioni AR"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
