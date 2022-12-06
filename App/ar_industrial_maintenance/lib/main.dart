@@ -1,3 +1,5 @@
+import 'package:ar_industrial_maintenance/image_detection_page.dart';
+import 'package:ar_industrial_maintenance/qrview.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -106,7 +108,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        // onPressed: _incrementCounter,
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const QRViewExample(),
+          ));
+        },
+        // onPressed: () {
+        //   Navigator.of(context).push(MaterialPageRoute(
+        //     builder: (context) => ImageDetectionPage(),
+        //   ));
+        // },
+
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
