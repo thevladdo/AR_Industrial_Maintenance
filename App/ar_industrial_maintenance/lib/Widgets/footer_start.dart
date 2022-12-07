@@ -1,4 +1,5 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:ar_industrial_maintenance/Screens/qrview.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/image_detection_page.dart';
@@ -27,14 +28,9 @@ class FooterStartButton extends StatelessWidget {
             color: const Color(0xffAF182B),
             height: 60,
             width: 220,
-            // onPressed: () {
-            //   Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) => const QRViewExample(),
-            //   ));
-            // },
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const ImageDetectionPage(),
+                builder: (context) => const QRViewExample(),
               ));
             },
             child: const Text(

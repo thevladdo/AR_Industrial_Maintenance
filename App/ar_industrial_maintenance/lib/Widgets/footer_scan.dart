@@ -28,11 +28,6 @@ class FooterScan extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            // onPressed: () {
-            //   Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) => ImageDetectionPage(),
-            //   ));
-            // },
             child: const Text(
               '< BACK',
               style: TextStyle(

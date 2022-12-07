@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:ar_industrial_maintenance/Screens/image_detection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -80,11 +81,20 @@ class _QRViewExampleState extends State<QRViewExample> {
     setState(() {
       this.controller = controller;
     });
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
-    });
+    controller.scannedDataStream.listen(
+      (scanData) async {
+        setState(() {
+          result = scanData;
+        });
+
+        if (result != null) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const ImageDetectionPage(),
+          ));
+          await controller.pauseCamera();
+        }
+      },
+    );
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
