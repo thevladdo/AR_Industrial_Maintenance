@@ -1,7 +1,8 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:go_router/go_router.dart';
+import '../Widgets/zone_component.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/title.dart';
-import '../Widgets/zone_component.dart';
 
 class ZoneHomePage extends StatefulWidget {
   const ZoneHomePage({super.key});
@@ -62,7 +63,7 @@ class _ZoneHomePage extends State<ZoneHomePage> {
                       height: 45,
                       width: 180,
                       onPressed: () {
-                        Navigator.pop(context);
+                        context.go('/home');
                       },
                       child: const Text(
                         'CHANGE MACHINE',

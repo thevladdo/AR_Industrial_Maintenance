@@ -1,5 +1,5 @@
 import 'package:animated_button/animated_button.dart';
-import 'package:ar_manager/Screens/zone_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 class MachineComponent extends StatefulWidget {
@@ -71,13 +71,7 @@ class _MachineComponent extends State<MachineComponent> {
                 color: const Color.fromARGB(255, 46, 46, 46),
                 height: 45,
                 width: 100,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ZoneHomePage()),
-                  );
-                },
+                onPressed: () => context.go('/machine'),
                 child: const Text(
                   'OPEN',
                   style: TextStyle(
