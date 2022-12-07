@@ -1,6 +1,7 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
-import '../Screens/qrview.dart';
+
+import '../Screens/image_detection_page.dart';
 
 class FooterStartButton extends StatelessWidget {
   const FooterStartButton({super.key});
@@ -26,16 +27,16 @@ class FooterStartButton extends StatelessWidget {
             color: const Color(0xffAF182B),
             height: 60,
             width: 220,
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const QRViewExample(),
-              ));
-            },
             // onPressed: () {
             //   Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) => ImageDetectionPage(),
+            //     builder: (context) => const QRViewExample(),
             //   ));
             // },
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const ImageDetectionPage(),
+              ));
+            },
             child: const Text(
               'START SCANNING',
               style: TextStyle(

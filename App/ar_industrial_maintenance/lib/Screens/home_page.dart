@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: const EdgeInsets.only(bottom: 30, left: 30, right: 30),
               child: const Text(
-                'Benvenuto in\n AR Industrial Maintenance',
+                'Welcome in\n AR Industrial Maintenance',
                 style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 20,
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: const EdgeInsets.only(left: 30, right: 30),
               child: const Text(
-                'Inquadra in codice QR posizionato sulla zona di interesse per illustrare le informazioni',
+                'Frame in QR code placed on area of interest to illustrate information',
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 16,

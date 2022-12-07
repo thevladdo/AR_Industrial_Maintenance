@@ -3,6 +3,9 @@ import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
+import '../Widgets/footer_scan.dart';
+import '../Widgets/title.dart';
+
 class ImageDetectionPage extends StatefulWidget {
   const ImageDetectionPage({super.key});
 
@@ -24,11 +27,25 @@ class _ImageDetectionPageState extends State<ImageDetectionPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Image Detection Sample')),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          toolbarHeight: 70,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          title: const AppTitle(),
+        ),
         body: ARKitSceneView(
           detectionImagesGroupName: 'AR Resources',
           onARKitViewCreated: onARKitViewCreated,
         ),
+        bottomNavigationBar: const FooterScan(),
       );
 
   void onARKitViewCreated(ARKitController arkitController) {
