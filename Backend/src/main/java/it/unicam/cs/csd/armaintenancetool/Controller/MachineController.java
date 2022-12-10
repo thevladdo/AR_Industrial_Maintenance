@@ -6,7 +6,6 @@ import it.unicam.cs.csd.armaintenancetool.Service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -33,17 +32,17 @@ public class MachineController {
     }
 
     @PutMapping("/addZone")
-    public List<ZoneModel> addZoneToMachine(@RequestBody @Param("machine") UUID machineId, @RequestBody @Param("zone") List<ZoneModel> zone){
+    public List<ZoneModel> addZoneToMachine(@RequestBody @Param("machineId") UUID machineId, @RequestBody @Param("zone") List<ZoneModel> zone){
         return machineService.addZoneToMachine(zone, machineId);
     }
 
     @PutMapping("/removeZone")
-    public List<ZoneModel> removeZoneFromMachine(@RequestBody @Param("machine") UUID machineId, @RequestBody @Param("zone") List<ZoneModel> zone){
+    public List<ZoneModel> removeZoneFromMachine(@RequestBody @Param("machineId") UUID machineId, @RequestBody @Param("zone") List<ZoneModel> zone){
         return machineService.removeZoneFromMachine(zone, machineId);
     }
 
     @PutMapping("/updateZone")
-    public List<ZoneModel> updateZoneInMachine(@RequestBody @Param("machine") UUID machineId, @RequestBody @Param("zone") List<ZoneModel> zone){
+    public List<ZoneModel> updateZoneInMachine(@RequestBody @Param("machineId") UUID machineId, @RequestBody @Param("zone") List<ZoneModel> zone){
         return machineService.updateZoneInMachine(zone, machineId);
     }
 }

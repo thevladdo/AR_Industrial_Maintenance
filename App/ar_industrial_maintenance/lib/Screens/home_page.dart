@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: const EdgeInsets.only(left: 30, right: 30),
               child: const Text(
-                'Frame in QR code placed on area of interest to illustrate information',
+                'Frame in QR code placed on area of interest to illustrate the informations',
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 16,

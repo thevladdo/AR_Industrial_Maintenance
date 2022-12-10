@@ -2,8 +2,6 @@ import 'package:animated_button/animated_button.dart';
 import 'package:ar_industrial_maintenance/Screens/qrview.dart';
 import 'package:flutter/material.dart';
 
-import '../Screens/image_detection_page.dart';
-
 class FooterStartButton extends StatelessWidget {
   const FooterStartButton({super.key});
 
