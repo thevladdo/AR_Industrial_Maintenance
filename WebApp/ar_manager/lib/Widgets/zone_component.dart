@@ -74,6 +74,40 @@ class _ZoneComponent extends State<ZoneComponent> {
           Row(
             children: [
               AnimatedButton(
+                color: const Color.fromARGB(255, 46, 46, 46),
+                height: 45,
+                width: 100,
+                onPressed: () {},
+                child: RichText(
+                  text: const TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "QR ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: <Shadow>[
+                            Shadow(
+                                color: Color.fromARGB(255, 178, 185, 208),
+                                offset: Offset.zero,
+                                blurRadius: 20)
+                          ],
+                        ),
+                      ),
+                      WidgetSpan(
+                        child: Icon(
+                          Icons.download_rounded,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 30),
+              AnimatedButton(
                 color: const Color.fromARGB(255, 255, 191, 0),
                 height: 45,
                 width: 100,
