@@ -2,7 +2,6 @@ package it.unicam.cs.csd.armaintenancetool.Model;
 
 
 import org.springframework.data.annotation.Id;
-import java.util.List;
 import java.util.UUID;
 import lombok.*;
 
@@ -19,5 +18,4 @@ public class MachineModel {
     private String description;
     private String status;
     private String timestamp;
-    private List<ZoneModel> zone;
 }

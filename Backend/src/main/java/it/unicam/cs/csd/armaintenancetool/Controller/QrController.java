@@ -1,6 +1,6 @@
 package it.unicam.cs.csd.armaintenancetool.Controller;
 
-import it.unicam.cs.csd.armaintenancetool.Model.ZoneModel;
+import it.unicam.cs.csd.armaintenancetool.Model.ZoneId;
 import it.unicam.cs.csd.armaintenancetool.Service.QrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.awt.image.BufferedImage;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.io.IOException;
 
 @RestController
 @RequestMapping(path = "artool/zone/qr")
@@ -23,7 +20,7 @@ public class QrController {
 
 
     @GetMapping(path = "/generate", produces = MediaType.IMAGE_PNG_VALUE)
-    public BufferedImage createQr(@RequestBody @Param("zoneId") ZoneModel.ZoneId zoneId){
+    public BufferedImage createQr(@RequestBody @Param("zoneId") ZoneId zoneId){
         return service.generateQRCodeImage(zoneId);
     }
 

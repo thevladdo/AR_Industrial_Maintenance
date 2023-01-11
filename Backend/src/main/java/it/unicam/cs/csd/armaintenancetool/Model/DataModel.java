@@ -19,6 +19,7 @@ public class DataModel {
     private String unit;
     private String timestamp;
     private String sensor;
+    private ZoneId zoneId;
 }
 
 

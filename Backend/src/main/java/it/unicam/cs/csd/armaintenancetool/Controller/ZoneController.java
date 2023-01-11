@@ -2,12 +2,13 @@ package it.unicam.cs.csd.armaintenancetool.Controller;
 
 import it.unicam.cs.csd.armaintenancetool.Service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
-import it.unicam.cs.csd.armaintenancetool.Model.DataModel;
+import it.unicam.cs.csd.armaintenancetool.Model.ZoneId;
 import it.unicam.cs.csd.armaintenancetool.Model.ZoneModel;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.List;
+import java.util.UUID;
 @RestController
 @RequestMapping(path = "artool/zone")
 public class ZoneController {
@@ -15,9 +16,14 @@ public class ZoneController {
     @Autowired
     private ZoneService zoneService;
 
-    @PostMapping("/addZone")
-    public ZoneModel addZone(@RequestBody @Param("zone") ZoneModel zone){
-        return zoneService.addZone(zone);
+    @GetMapping("/getZone")
+    public ZoneModel getZone(@RequestBody @Param("zone") ZoneId zone){
+        return zoneService.getZone(zone);
+    }
+
+    @GetMapping("/getZoneByMachine")
+    public List<ZoneModel> getZoneByMachine(@RequestBody @Param("zone") UUID machineId){
+        return zoneService.getZoneByMachine(machineId);
     }
 
     @DeleteMapping("/deleteZone")
@@ -30,18 +36,8 @@ public class ZoneController {
         return zoneService.updateZone(zone);
     }
 
-    @PutMapping("/addData")
-    public List<DataModel> addDataToZone(@RequestBody @Param("data") List<DataModel> data, @Param("zoneId") ZoneModel.ZoneId zoneId){
-        return zoneService.addDataToZone(data, zoneId);
-    }
-
-    @PutMapping("/removeData")
-    public List<DataModel> removeDataFromZone(@RequestBody @Param("data") List<DataModel> data, @Param("zoneId") ZoneModel.ZoneId zoneId){
-        return zoneService.removeDataFromZone(data, zoneId);
-    }
-
-    @PutMapping("/updateData")
-    public List<DataModel> updateDataInZone(@RequestBody @Param("data") List<DataModel> data, @Param("zoneId") ZoneModel.ZoneId zoneId){
-        return zoneService.updateDataInZone(data, zoneId);
+    @PostMapping("/addZone")
+    public ZoneModel addZone(@RequestBody @Param("zone") ZoneModel zone){
+        return zoneService.addZone(zone);
     }
 }
