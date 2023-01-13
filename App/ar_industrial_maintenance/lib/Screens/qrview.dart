@@ -88,10 +88,13 @@ class _QRViewExampleState extends State<QRViewExample> {
         });
 
         if (result != null) {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const ImageDetectionPage(),
-          ));
           await controller.pauseCamera();
+          // ignore: use_build_context_synchronously
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ImageDetectionPage(
+              result: result!.code!,
+            ),
+          ));
         }
       },
     );

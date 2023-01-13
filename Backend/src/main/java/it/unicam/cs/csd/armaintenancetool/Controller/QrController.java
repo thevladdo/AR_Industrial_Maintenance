@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.awt.image.BufferedImage;
+
+import com.google.zxing.WriterException;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping(path = "artool/zone/qr")
@@ -18,11 +21,12 @@ public class QrController {
     @Autowired
     private QrService service;
 
-
     @GetMapping(path = "/generate", produces = MediaType.IMAGE_PNG_VALUE)
-    public BufferedImage createQr(@RequestBody @Param("zoneId") ZoneId zoneId){
+    public byte[] createQr(@RequestBody @Param("zoneId") ZoneId zoneId) throws IOException, WriterException{
         return service.generateQRCodeImage(zoneId);
     }
+
+    
 
 /*    @GetMapping("/decode")
     public String decode(MultipartFile file, RedirectAttributes redirectAttributes){

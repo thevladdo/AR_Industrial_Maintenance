@@ -1,14 +1,15 @@
+// ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api
+
 import 'dart:async';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
-
 import '../Widgets/footer_scan.dart';
 import '../Widgets/title.dart';
 
 class ImageDetectionPage extends StatefulWidget {
-  const ImageDetectionPage({super.key});
-
+  const ImageDetectionPage({super.key, required this.result});
+  final String result;
   @override
   _ImageDetectionPageState createState() => _ImageDetectionPageState();
 }

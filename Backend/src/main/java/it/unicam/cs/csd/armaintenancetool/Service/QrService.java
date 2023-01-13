@@ -1,5 +1,7 @@
 package it.unicam.cs.csd.armaintenancetool.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
@@ -9,21 +11,27 @@ import it.unicam.cs.csd.armaintenancetool.Model.ZoneId;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 import java.awt.image.BufferedImage;
+import java.io.*;
+
+import javax.imageio.ImageIO;
 
 @Service
 public class QrService {
 
-    public BufferedImage generateQRCodeImage(@NonNull ZoneId zoneId){
-        String text = zoneId.toString();
+    public byte[] generateQRCodeImage(@NonNull ZoneId zoneId) throws IOException, WriterException{
+        ObjectMapper mapper = new ObjectMapper();
+        String text = mapper.writeValueAsString(zoneId);
+
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = null;
-        try {
-            bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 500, 500);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-        assert bitMatrix != null;
-        return MatrixToImageWriter.toBufferedImage(bitMatrix);
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 500, 500);
+
+        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", baos);
+        byte[] bytes = baos.toByteArray();
+
+        return bytes;
     }
 
     /*public String decodeQR(byte[] qrCodeBytes) {
