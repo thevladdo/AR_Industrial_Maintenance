@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:ar_industrial_maintenance/Screens/qrview.dart';
+import 'package:ar_industrial_maintenance/Screens/widget_projection_page.dart';
 import 'package:flutter/material.dart';
 
 class FooterStartButton extends StatelessWidget {

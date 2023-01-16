@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:ar_industrial_maintenance/Screens/image_detection_page.dart';
+import 'package:ar_industrial_maintenance/Screens/widget_projection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -91,9 +92,7 @@ class _QRViewExampleState extends State<QRViewExample> {
           await controller.pauseCamera();
           // ignore: use_build_context_synchronously
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ImageDetectionPage(
-              result: result!.code!,
-            ),
+            builder: (context) => const WidgetProjectionPage(),
           ));
         }
       },
