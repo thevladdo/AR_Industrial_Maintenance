@@ -76,3 +76,11 @@ flutter:
         - asset: assets/fonts/SFMono/SFMonoBold.otf
         - asset: assets/fonts/SFMono/SFMonoMedium.otf
         - asset: assets/fonts/SFMono/SFMonoRegular.otf
+    
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans/NotoSans-ExtraBold.ttf
+          style: normal
+          
+        - asset: assets/fonts/NotoSans/NotoSans-italic.ttf
+          style: italic
