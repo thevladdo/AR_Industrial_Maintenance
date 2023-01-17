@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ZoneComponent extends StatefulWidget {
   const ZoneComponent({super.key});
@@ -111,7 +112,9 @@ class _ZoneComponent extends State<ZoneComponent> {
                 color: const Color.fromARGB(255, 255, 191, 0),
                 height: 45,
                 width: 100,
-                onPressed: () {},
+                onPressed: () {
+                  context.go('/add/data');
+                },
                 child: const Text(
                   'EDIT',
                   style: TextStyle(

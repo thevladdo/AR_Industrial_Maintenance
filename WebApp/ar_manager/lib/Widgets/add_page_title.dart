@@ -3,10 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'images.dart';
 
-class MainTitle extends StatelessWidget {
-  const MainTitle({super.key, required this.route});
+class AddPageTitle extends StatelessWidget {
+  const AddPageTitle(
+      {super.key,
+      required this.saveRoute,
+      this.formKey,
+      this.pageContext,
+      this.backRoute});
 
-  final String route;
+  final String saveRoute;
+  final formKey;
+  final pageContext;
+  final backRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +31,10 @@ class MainTitle extends StatelessWidget {
                 height: 45,
                 width: 100,
                 onPressed: () {
-                  context.go(route);
+                  _onPressedSave(formKey, pageContext);
                 },
                 child: const Text(
-                  'ADD',
+                  'SAVE',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -45,36 +53,14 @@ class MainTitle extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 30),
               child: AnimatedButton(
-                color: const Color.fromARGB(255, 241, 241, 241),
-                height: 45,
-                width: 100,
-                onPressed: () {},
-                child: const Text(
-                  'EXPORT',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color.fromARGB(255, 175, 24, 43),
-                    shadows: <Shadow>[
-                      Shadow(
-                          color: Color.fromARGB(255, 178, 185, 208),
-                          offset: Offset.zero,
-                          blurRadius: 20)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 30),
-            Container(
-              margin: const EdgeInsets.only(top: 30),
-              child: AnimatedButton(
                 color: const Color.fromARGB(255, 175, 24, 43),
                 height: 45,
                 width: 100,
-                onPressed: () {},
+                onPressed: () {
+                  context.go(backRoute);
+                },
                 child: const Text(
-                  'LOGIN',
+                  'BACK',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -93,6 +79,19 @@ class MainTitle extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+}
+
+_onPressedSave(formKey, context) {
+  final form = formKey.currentState;
+  if (form!.validate()) {
+    form.save();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Processing Data'),
+      ),
+      //context.go(saveRoute);
     );
   }
 }

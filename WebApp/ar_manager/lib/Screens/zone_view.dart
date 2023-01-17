@@ -21,7 +21,9 @@ class _ZoneHomePage extends State<ZoneHomePage> {
         elevation: 0,
         toolbarHeight: 100,
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: const MachineTitle(),
+        title: const MainTitle(
+          route: '/add/zone',
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
