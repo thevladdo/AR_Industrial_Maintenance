@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class FooterScan extends StatelessWidget {
   const FooterScan({super.key});
@@ -26,7 +27,7 @@ class FooterScan extends StatelessWidget {
             height: 60,
             width: 120,
             onPressed: () {
-              Navigator.of(context).pop();
+              context.go('/home');
             },
             child: const Text(
               '< BACK',

@@ -1,5 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors, depend_on_referenced_packages
 import 'dart:math';
+import 'dart:math' as math;
+import 'package:ar_industrial_maintenance/Model/data_model.dart';
 import 'package:ar_industrial_maintenance/Widgets/ar_widget.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,8 @@ import '../Widgets/footer_scan.dart';
 import '../Widgets/title.dart';
 
 class WidgetProjectionPage extends StatefulWidget {
-  const WidgetProjectionPage({super.key});
+  const WidgetProjectionPage({super.key, required this.data});
+  final List<DataModel> data;
 
   @override
   _WidgetProjectionPageState createState() => _WidgetProjectionPageState();
@@ -23,12 +26,53 @@ class _WidgetProjectionPageState extends State<WidgetProjectionPage> {
   Matrix4 transform = Matrix4.identity();
   var random = Random();
 
+  List<Widget> widgets = List.empty(growable: true);
+
   @override
   void dispose() {
     arkitController.onAddNodeForAnchor = null;
     arkitController.onUpdateNodeForAnchor = null;
     arkitController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    widgets.add(ARKitSceneView(
+      trackingImagesGroupName: 'AR Resources',
+      onARKitViewCreated: onARKitViewCreated,
+      worldAlignment: ARWorldAlignment.camera,
+      configuration: ARKitConfiguration.imageTracking,
+    ));
+    super.initState();
+  }
+
+  void updateDataWidgets() {
+    widgets.clear();
+    widgets.add(ARKitSceneView(
+      trackingImagesGroupName: 'AR Resources',
+      onARKitViewCreated: onARKitViewCreated,
+      worldAlignment: ARWorldAlignment.camera,
+      configuration: ARKitConfiguration.imageTracking,
+    ));
+    for (DataModel d in widget.data) {
+      widgets.add(
+        Positioned(
+          left: x + d.getCoordinateX,
+          top: y + d.getCoordinateY,
+          child: Container(
+              transform: transform,
+              width: width,
+              height: height,
+              child: ArWidget(
+                name: d.getName,
+                value: d.getValue.toString(),
+                unit: d.getUnit,
+                alerts: true,
+              )),
+        ),
+      );
+    }
   }
 
   @override
@@ -48,59 +92,7 @@ class _WidgetProjectionPageState extends State<WidgetProjectionPage> {
           title: const AppTitle(),
         ),
         body: Stack(
-          children: [
-            ARKitSceneView(
-              trackingImagesGroupName: 'AR Resources',
-              onARKitViewCreated: onARKitViewCreated,
-              worldAlignment: ARWorldAlignment.camera,
-              configuration: ARKitConfiguration.imageTracking,
-            ),
-            if (anchorId != '')
-              Positioned(
-                left: x - 300,
-                top: y - 200,
-                child: Container(
-                    transform: transform,
-                    width: width,
-                    height: height,
-                    child: const ArWidget(
-                      name: 'WATER PUMP',
-                      value: '34,34',
-                      unit: 'bar',
-                      alerts: true,
-                    )),
-              ),
-            if (anchorId != '')
-              Positioned(
-                left: x + 400,
-                top: y - 190,
-                child: Container(
-                    transform: transform,
-                    width: width,
-                    height: height,
-                    child: const ArWidget(
-                      name: 'COOLANT',
-                      value: '78',
-                      unit: '° Celsius',
-                      alerts: false,
-                    )),
-              ),
-            if (anchorId != '')
-              Positioned(
-                left: x,
-                top: y,
-                child: Container(
-                    transform: transform,
-                    width: width,
-                    height: height,
-                    child: const ArWidget(
-                      name: 'FUEL TANK',
-                      value: '22',
-                      unit: 'L',
-                      alerts: true,
-                    )),
-              ),
-          ],
+          children: widgets,
         ),
         bottomNavigationBar: const FooterScan(),
       );
@@ -114,6 +106,7 @@ class _WidgetProjectionPageState extends State<WidgetProjectionPage> {
   void _handleAddAnchor(ARKitAnchor anchor) {
     if (anchor is ARKitImageAnchor) {
       anchorId = anchor.identifier;
+
       _updatePosition(anchor);
       // _updateRotation(anchor);
     }
@@ -122,19 +115,20 @@ class _WidgetProjectionPageState extends State<WidgetProjectionPage> {
   void _handleUpdateAnchor(ARKitAnchor anchor) {
     if (anchor.identifier == anchorId && anchor is ARKitImageAnchor) {
       _updatePosition(anchor);
+      updateDataWidgets();
       // _updateRotation(anchor);
     }
   }
 
-  // Future _updateRotation(ARKitAnchor anchor) async {
-  //   final t = anchor.transform.clone();
-  //   t.invertRotation();
-  //   t.rotateZ(math.pi / 2);
-  //   t.rotateX(math.pi / 2);
-  //   setState(() {
-  //     transform = t;
-  //   });
-  // }
+  Future _updateRotation(ARKitAnchor anchor) async {
+    final t = anchor.transform.clone();
+    t.invertRotation();
+    t.rotateZ(math.pi / 2);
+    t.rotateX(math.pi / 2);
+    setState(() {
+      transform = t;
+    });
+  }
 
   Future _updatePosition(ARKitImageAnchor anchor) async {
     final transform = anchor.transform;

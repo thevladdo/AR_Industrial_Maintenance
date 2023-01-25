@@ -1,24 +1,25 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:ar_industrial_maintenance/Screens/image_detection_page.dart';
-import 'package:ar_industrial_maintenance/Screens/widget_projection_page.dart';
+import 'package:ar_industrial_maintenance/Model/data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../Widgets/footer_scan.dart';
 import '../Widgets/title.dart';
 
-class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key}) : super(key: key);
+class ScanQRPage extends StatefulWidget {
+  const ScanQRPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
+  State<StatefulWidget> createState() => _ScanQRPageState();
 }
 
-class _QRViewExampleState extends State<QRViewExample> {
+class _ScanQRPageState extends State<ScanQRPage> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  List<DataModel> data = List.empty(growable: true);
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -89,11 +90,8 @@ class _QRViewExampleState extends State<QRViewExample> {
         });
 
         if (result != null) {
-          await controller.pauseCamera();
-          // ignore: use_build_context_synchronously
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const WidgetProjectionPage(),
-          ));
+          controller.pauseCamera();
+          context.go('/loading', extra: result!.code);
         }
       },
     );

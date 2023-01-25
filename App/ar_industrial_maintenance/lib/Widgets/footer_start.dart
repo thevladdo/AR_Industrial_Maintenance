@@ -1,7 +1,7 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:ar_industrial_maintenance/Screens/qrview.dart';
-import 'package:ar_industrial_maintenance/Screens/widget_projection_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class FooterStartButton extends StatelessWidget {
   const FooterStartButton({super.key});
@@ -28,9 +28,7 @@ class FooterStartButton extends StatelessWidget {
             height: 60,
             width: 220,
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const QRViewExample(),
-              ));
+              context.go('/scanqr');
             },
             child: const Text(
               'START SCANNING',
