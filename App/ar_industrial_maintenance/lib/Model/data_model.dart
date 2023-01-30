@@ -30,6 +30,25 @@ class DataModel {
 
   set setUnit(unit) => this.unit = unit;
 
-  DataModel.complete(this.id, this.name, this.coordinateX, this.coordinateY,
+  DataModel(this.id, this.name, this.coordinateX, this.coordinateY,
       this.unit, this.value);
+
+factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
+  json["id"],
+  json["name"],
+  json["coordinateX"],
+  json["coordinateY"],
+  json["unit"],
+  json["value"],
+  );
+
+Map<String, dynamic> toJson() => {
+  "id" : id,
+  "name" : name,
+  "coordinateX" : coordinateX,
+  "coordinateY" : coordinateY,
+  "unit" : unit,
+  "value" : value,
+   };
+
 }

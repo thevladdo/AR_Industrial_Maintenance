@@ -6,6 +6,8 @@ class DataModel {
   double coordinateY;
   String unit;
   SensorModel sensor;
+  
+  
   String get getName => name;
 
   set setName(String name) => this.name = name;
@@ -26,6 +28,26 @@ class DataModel {
 
   set setSensor(SensorModel sensor) => this.sensor = sensor;
 
-  DataModel(
-      this.name, this.coordinateX, this.coordinateY, this.unit, this.sensor);
+
+
+  DataModel(this.name, this.coordinateX, this.coordinateY, this.unit, this.sensor);
+
+  
+  factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
+      json["name"], 
+      json["coordinateX"], 
+      json["coordinateY"], 
+      json["unit"], 
+      json["sensor"],
+  );
+  
+  
+  Map<String, dynamic> toJson () => {
+    "name" : name ,
+    "coordinateX" : coordinateX ,
+    "coordinateY" : coordinateY ,
+    "unit" : unit ,
+    "sensor" : sensor ,
+  };
+  
 }

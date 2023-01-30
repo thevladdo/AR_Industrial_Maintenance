@@ -11,4 +11,15 @@ class ZoneId {
   get getZoneNum => zoneNum;
 
   set setZoneNum(zoneNum) => this.zoneNum = zoneNum;
+
+  factory ZoneId.fromJson(Map<String, dynamic> json) => 
+   ZoneId(
+    json["machineId"],
+    json["zoneNum"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "machineId": machineId,
+    "zoneNum": zoneNum,
+  };
 }

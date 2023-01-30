@@ -11,8 +11,6 @@ class SensorModel {
   ZoneModel zone;
   String id;
 
-  SensorModel(this.type, this.zone, this.id);
-
   get getType => type;
 
   set setType(type) => this.type = type;
@@ -24,4 +22,20 @@ class SensorModel {
   get getId => id;
 
   set setId(id) => this.id = id;
+
+  SensorModel(this.type, this.zone, this.id);
+ 
+
+  factory SensorModel.fromJson(Map<String, dynamic> json) => 
+   SensorModel(
+    json["type"],
+    json["id"],
+    json["zone"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "type": type,
+    "id": id,
+    "zone": zone,
+  };
 }
