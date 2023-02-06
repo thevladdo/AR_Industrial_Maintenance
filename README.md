@@ -4,7 +4,13 @@
  <img width="800" alt="LoccioniAR_Cover" src="https://user-images.githubusercontent.com/56829605/216935664-5f556e59-5964-4596-b6f2-07b7f51244e9.png">
 </p>
 
-<p align="center">This project is an ArM App developed with <b>Flutter</b>, <b>Springboot</b>, <b>MongoDB</b> and ARkit/ARcore technologies.</p>
+<p align="center">
+ This project is an ArM App developed with <b>Flutter</b>, <b>Springboot</b>, <b>MongoDB</b> and ARkit/ARcore technologies.
+ <br>
+ <br>
+ <img width="100" alt="Flutter Logo" src="https://storage.googleapis.com/cms-storage-bucket/847ae81f5430402216fd.svg">
+ <img width="100" alt="MongoDB Logo" src="https://webassets.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png">
+</p>
 
 
 ## Features
@@ -13,8 +19,7 @@
 * Backend development with Springboot. 
 * Frontend development with Flutter. 
 
-## Prerequisites 
-* [Flutter](https://flutter.dev/) installed on your machine. 
+## Prerequisites  
 * [Springboot](https://spring.io/projects/spring-boot) installed on your machine. 
 * [MongoDB](https://www.mongodb.com/) installed on your machine or a remote server instance set up for the project. 
 * [ARKit](https://developer.apple.com/arkit/) and [ARCore](https://developers.google.com/ar) SDKs installed on your machine or a remote server instance set up for the project if you want to use them in the app development process as well as for testing purposes before deploying it to production environment(s).  
